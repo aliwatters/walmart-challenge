@@ -1,0 +1,21 @@
+{
+  "name": "walmart-import",
+  "version": "1.0.0",
+  "description": "",
+  "main": "import.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "confidence": "^3.0.1",
+    "eslint": "^3.3.0",
+    "eslint-config-aliwatters": "git+ssh://git@github.com/aliwatters/eslint-config-aliwatters.git",
+    "eslint-html-reporter": "^0.5.2",
+    "eslint-plugin-import": "^1.13.0"
+  }
+}

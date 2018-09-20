@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-// read a csv file for the ids - keep simple with sync
-// eslint-disable-next-line
 const content = fs.readFileSync('ids.csv', 'utf8');
 const ids = content.trim().split(',');
 

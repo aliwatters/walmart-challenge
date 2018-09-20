@@ -12,7 +12,7 @@ server.route({
   method: "GET",
   path: "/",
   handler: (request, h) => {
-    return "It Works";
+    return "Simple API Server for Walmart Take-Home Challenge";
   }
 });
 
@@ -24,9 +24,8 @@ server.route({
     let id = request.params.id;
     let data = db.getProduct(id);
 
-    // here find in data/db.json and return
     if (data == undefined) {
-      // 404 error
+      return h.response("Error: Not Found").code(404);
     } else {
       return data;
     }
@@ -37,10 +36,17 @@ server.route({
   method: "GET",
   path: "/search",
   handler: (request, h) => {
-    let keyword = request.query.keyword;
-    // Here - split by boundry, and only use first word
+    if (!request.query.keyword) {
+      return h.response("Error: Invalid Query").code(400);
+    }
+
+    let inKeyword = request.query.keyword;
+
+    // split by boundry, and only use first word
+    let keyword = inKeyword.split(/\W/g)[0] || "";
+
     let data = db.search(keyword);
-    return data; // empty array when nothing found so 404 not a valid response
+    return data; // empty array when nothing found
   }
 });
 

@@ -8,9 +8,12 @@
     "hapi-pino": "^5.1.0",
     "underscore": "^1.9.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-config-aliwatters": "git+ssh://git@github.com/aliwatters/eslint-config-aliwatters.git",
+    "jest": "^23.6.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC"

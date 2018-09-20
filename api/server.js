@@ -38,6 +38,7 @@ server.route({
   path: "/search",
   handler: (request, h) => {
     let keyword = request.query.keyword;
+    // Here - split by boundry, and only use first word
     let data = db.search(keyword);
     return data; // empty array when nothing found so 404 not a valid response
   }

@@ -41,7 +41,7 @@ function prepStringForFrequency(input) {
   return arr;
 }
 
-const keys = ['itemId', 'name', 'shortDescription', 'salePrice'];
+const keys = ['itemId', 'name', 'shortDescription', 'salePrice', 'largeImage'];
 
 const db = {};
 const itemKeywords = {};

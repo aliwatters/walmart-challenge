@@ -45,7 +45,7 @@ server.route({
     let inKeyword = request.query.keyword;
 
     // split by boundry, and only use first word
-    let keyword = inKeyword.split(/\W/g)[0] || "";
+    let keyword = inKeyword.split(/\W/g)[0].toLowerCase() || "";
 
     let data = db.search(keyword);
     return data; // empty array when nothing found

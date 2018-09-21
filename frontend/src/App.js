@@ -13,9 +13,8 @@ class Product extends Component {
       item: {}
     };
   }
-  // todo: images and minimal info squares
+
   componentDidMount(props) {
-    console.log('GETTING DATA FOR PRODUCT:', this);
     const id = this.props.value;
     axios.get(`${apiUrl}/product/${id}`).then(res => {
       this.setState({
@@ -27,7 +26,21 @@ class Product extends Component {
 
   render() {
     const item = this.state.item;
-    return <li key={item.key}>{item.name}</li>;
+
+    // note: quick layout here - use of br's etc use css in real apps
+    return (
+      <li key={item.key} className="Product">
+        <img src={item.largeImage} alt={item.name} />
+        <br></br>
+        <b>{item.name}</b>
+        <hr></hr>
+        <div className="ProductDecription">
+          {item.shortDescription}
+        </div>
+        <br></br>
+        <span className="ProductPrice">${item.salePrice}</span>
+      </li>
+    );
   }
 }
 
@@ -35,22 +48,44 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: "Backpack",
-      results: []
+      keyword: "",
+      results: [],
+      typing: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ keyword: event.target.value, typing: true });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ typing: false });
+    this.search(this.state.keyword);
   }
 
   search(keyword) {
-    // use config here
-    keyword = keyword.toLowerCase();
-    alert(keyword);
     axios.get(`${apiUrl}/search?keyword=${keyword}`).then(res => {
-      console.log(res.data);
       this.setState({ keyword, results: res.data });
     });
   }
 
   render(props) {
+    let resultContent = "";
+    if (this.state.typing) {
+      resultContent = "typing...";
+    } else if (this.state.keyword === "") {
+      resultContent = 'try "Backpack"';
+    } else if (this.state.results.length < 1) {
+      resultContent = "no results found";
+    } else {
+      resultContent = this.state.results.map(id => (
+        <Product key={id} value={id} />
+      ));
+    }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -58,20 +93,17 @@ class App extends Component {
           <h1 className="App-title">Welcome to WalReactMart</h1>
         </header>
         <p className="App-intro" />
-        <div className="searchContainer">
-          Search:
+        <form className="searchContainer" onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="keyword"
-            defaultValue={this.state.keyword}
+            name="keyword"
+            value={this.state.keyword}
+            onChange={this.handleChange}
           />
-          <button onClick={() => this.search(this.state.keyword)}>
-            Sumbit
-          </button>
-        </div>
-        <ul className="resultsContainer">
-          {this.state.results.map(id => <Product key={id} value={id} />)}
-        </ul>
+          <button>Search</button>
+        </form>
+        <ul className="resultsContainer">{resultContent}</ul>
       </div>
     );
   }

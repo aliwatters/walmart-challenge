@@ -12,6 +12,9 @@
     "eslint-config-aliwatters": "git+ssh://git@github.com/aliwatters/eslint-config-aliwatters.git",
     "jest": "^23.6.0"
   },
+  "engines": {
+    "node": "10.10.0"
+  },
   "scripts": {
     "test": "jest"
   },

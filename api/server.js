@@ -20,6 +20,7 @@ server.route({
 server.route({
   method: "GET",
   path: "/product/{id}",
+  options: { cors: true },
   handler: (request, h) => {
     let id = request.params.id;
     let data = db.getProduct(id);
@@ -35,6 +36,7 @@ server.route({
 server.route({
   method: "GET",
   path: "/search",
+  options: { cors: true },
   handler: (request, h) => {
     if (!request.query.keyword) {
       return h.response("Error: Invalid Query").code(400);

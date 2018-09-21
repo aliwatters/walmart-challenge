@@ -47,3 +47,7 @@ I didn't follow a git branching strategy (working within a team would do that), 
 5. the react app is a simple demo, again each component in it's own file, look at if redux would be a better choice for state, add bootstrap or whatever UI/UX framework is chosen.
 6. lots of work to productionize all of this! SLIs, SLOs defined and implemented, config from env vars of etc'd, hooking into CI/CD
 7. and lots more...
+
+## Results
+
+![Image of WalReactMart](https://raw.githubusercontent.com/aliwatters/walmart-challenge/master/WalReactMart.png)
